@@ -1,0 +1,23 @@
+services:
+  app:
+    build: .
+    container_name: teler_deepgram_bridge
+    ports:
+      - "8000:8000"
+    env_file: ".env"
+    restart: unless-stopped
+
+  ngrok:
+    image: ngrok/ngrok:latest
+    container_name: ngrok
+    ports:
+      - "4040:4040"
+    env_file: ".env"
+    command: http teler_deepgram_bridge:8000
+    restart: unless-stopped
+    depends_on:
+      - app
+
+networks:
+  default:
+    name: teler-deepgram-bridge-node

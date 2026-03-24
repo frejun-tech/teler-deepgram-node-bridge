@@ -1,0 +1,44 @@
+{
+  "name": "teler-deepgram-node-bridge",
+  "version": "1.0.0",
+  "description": "Teler integration with Deepgram over WebSocket connection",
+  "keywords": [
+    "Teler",
+    "Deepgram",
+    "Node",
+    "SDK",
+    "WebSocket"
+  ],
+  "homepage": "https://github.com/frejun-tech/teler-deepgram-node-bridge#readme",
+  "bugs": {
+    "url": "https://github.com/frejun-tech/teler-deepgram-node-bridge/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frejun-tech/teler-deepgram-node-bridge.git"
+  },
+  "license": "ISC",
+  "author": "rupak-stack",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "build": "tsc",
+    "serve": "node dist/index.js"
+  },
+  "dependencies": {
+    "@frejun/teler": "^1.0.8",
+    "axios": "^1.13.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "ws": "^8.19.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.0.9",
+    "@types/ws": "^8.18.1",
+    "nodemon": "^3.1.11",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
