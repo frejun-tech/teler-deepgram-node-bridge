@@ -8,7 +8,7 @@ A reference integration between Teler and DEEPGRAM in Node, based on [Media Stre
 1. **Clone and configure:**
 
    ```bash
-   git clone https://github.com/rupak-stack/teler-deepgram-node-bridge.git
+   git clone https://github.com/frejun-tech/teler-deepgram-node-bridge.git
    cd teler-deepgram-node-bridge
    cp .env.example .env
    # Edit .env with your actual values
@@ -23,7 +23,7 @@ A reference integration between Teler and DEEPGRAM in Node, based on [Media Stre
 
 | Variable                   | Description                   | Default  |
 | -------------------------- | ----------------------------- | -------- |
-| `DEEPGRAM_AGENT_ID`        | Your DEEPGRAM assistant ID        | Required |
+| `DEEPGRAM_WS_URL`        | DEEPGRAM Web Socket URL        | Required |
 | `DEEPGRAM_API_KEY`             | Your DEEPGRAM API key             | Required |
 | `DEEPGRAM_SAMPLE_RATE`         | Audio sample rate of DEEPGRAM     | 8000     |
 | `DEEPGRAM_MESSAGE_BUFFER_SIZE` | Messages to buffer before relay| 50      |
