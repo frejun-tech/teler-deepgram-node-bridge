@@ -30,7 +30,7 @@ Teler is a programmable voice API by FreJun. It handles carriers, phone numbers,
 | `DEEPGRAM_WS_URL`        | DEEPGRAM Web Socket URL        | Required |
 | `DEEPGRAM_API_KEY`             | Your DEEPGRAM API key             | Required |
 | `DEEPGRAM_SAMPLE_RATE`         | Audio sample rate of DEEPGRAM     | 8000     |
-| `DEEPGRAM_MESSAGE_BUFFER_SIZE` | Messages to buffer before relay| 50      |
+| `DEEPGRAM_MESSAGE_BUFFER_SIZE` | Messages to buffer before relay| 16      |
 | `TELER_API_KEY`            | Your Teler API key            | Required |
 | `TELER_SAMPLE_RATE`        | Audio sample rate of Teler    | 8k       |
 | `TELER_CHUNK_SIZE`        | Chunk size of Teler audio      | 500      |
