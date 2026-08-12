@@ -15,4 +15,7 @@ export const config = {
     deepgramApiKey:             process.env.DEEPGRAM_API_KEY || '',
     deepgramSampleRate:         Number(process.env.DEEPGRAM_SAMPLE_RATE) || 8000,
     deepgramBufferSize:         Number(process.env.DEEPGRAM_MESSAGE_BUFFER_SIZE) || 20,
+
+    elevenlabsApiKey:           process.env.ELEVENLABS_API_KEY || '',
+    elevenlabsVoiceId:          process.env.ELEVENLABS_VOICE_ID || ''
 } as const;

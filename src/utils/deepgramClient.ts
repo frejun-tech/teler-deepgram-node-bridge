@@ -1,5 +1,4 @@
 import { WebSocket } from "ws";
-import { config } from "../core/config";
 import { agentConfig } from "./agentConfig";
 
 export class DeepgramClient {
