@@ -5,7 +5,7 @@ import { StreamConnector } from '@frejun/teler';
 import { StreamType }      from '@frejun/teler';
 import { callStreamHandler, remoteStreamHandler } from './streamHandlers';
 import { config } from '../core/config';
-import { DeepgramClient } from './deepgramClient';
+import { Call } from '../models/call';
 
 export const wss = new WebSocketServer({ noServer: true });
 
@@ -22,17 +22,17 @@ wss.on('connection', async (callWs: WebSocket) => {
         return;
     }
     
+    const call = new Call();
+
     const connector = new StreamConnector(
         wsURL,
+        callStreamHandler(call),
+        remoteStreamHandler(call),
         StreamType.BIDIRECTIONAL,
-        callStreamHandler,
-        remoteStreamHandler(),
         configuration
     );
 
-    const remoteWs = await connector.bridgeStream(callWs);
-    const deepgramClient = new DeepgramClient(remoteWs);
-    deepgramClient.waitForRemote();
+    await connector.bridgeStream(callWs);
 });
 
 export const handleUpgrade = (request: IncomingMessage, socket: Socket, head: Buffer) => {

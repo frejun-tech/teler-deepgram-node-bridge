@@ -1,28 +1,36 @@
 import { StreamData, StreamHandlerResult, StreamOP } from "@frejun/teler";
 import { config } from "../core/config";
+import { Call } from "../models/call";
+import { agentConfig } from "./agentConfig";
 
-let isSettingsApplied = false;
+export const callStreamHandler = (call: Call) =>  {
 
-export const callStreamHandler = async (message: StreamData): Promise<StreamHandlerResult> => {
-    try {
-        if(isSettingsApplied && typeof message === "string") {
-            const data = JSON.parse(message);
-    
-            if(data["type"] === "audio") {
-                const audioB64 = data["data"]["audio_b64"];
-                const payload = Buffer.from(audioB64, 'base64');
-                return [payload, StreamOP.RELAY];
+    const handler = async (message: StreamData): Promise<StreamHandlerResult> => {
+        try {
+            if (call.isAgentConfigSent === false) {
+                call.isAgentConfigSent = true;
+                return [agentConfig, StreamOP.RELAY];
             }
+            if(call.isWelcomed && typeof message === "string") {
+                const data = JSON.parse(message);
+    
+                if(data["type"] === "audio") {
+                    const audioB64 = data["data"]["audio_b64"];
+                    const payload = Buffer.from(audioB64, 'base64');
+                    return [payload, StreamOP.RELAY];
+                }
+            }
+
+        return ['', StreamOP.PASS];
+        } catch(err) {
+            console.log("Error in call stream handler", err);
+            return ['', StreamOP.PASS];
         }
-
-        return ['', StreamOP.PASS];
-    } catch(err) {
-        console.log("Error in call stream handler", err);
-        return ['', StreamOP.PASS];
     }
-}
+    return handler;
+} 
 
-export const remoteStreamHandler = () => {
+export const remoteStreamHandler = (call: Call) => {
     let chunkId = 1
     const messageBuffer: Buffer[] = [];
 
@@ -57,10 +65,11 @@ export const remoteStreamHandler = () => {
                     return [payload, StreamOP.RELAY];
                     
                 } else if(type === "Welcome") {
+                    call.isWelcomed = true;
                     console.log(`Welcome, request id: ${control.request_id}`);
 
                 } else if(type === "SettingsApplied") {
-                    isSettingsApplied = true;
+                    call.isSettingsApplied = true;
                     console.log(`Settings applied to the agent`);
 
                 }

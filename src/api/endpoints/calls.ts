@@ -16,11 +16,11 @@ callRouter.post('/initiate-call', async (req: Request, res: Response) => {
         const flowUrl           = getFlowUrl();
         const statusCallbackUrl = getStatusCallbackUrl();
 
-        const call = await client.calls.create({
-            from_number: fromNumber,
-            to_number: toNumber,
-            flow_url: flowUrl,
-            status_callback_url: statusCallbackUrl,
+        const call = await client.voice.calls.create({
+            fromNumber,
+            toNumber,
+            flowUrl,
+            statusCallbackUrl,
             record: record ?? true
         });
 
